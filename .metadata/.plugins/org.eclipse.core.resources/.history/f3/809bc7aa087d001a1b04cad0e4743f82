@@ -1,0 +1,28 @@
+package br.edu.infnet.manutencao.AppManutencao.model.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.Solicitacao;
+
+@Service
+public class SolicitacaoService {
+			
+	public List<Solicitacao> obterLista(){
+		return null;
+	}	
+	
+	public Optional<Solicitacao> obterPorId(Integer id) {
+		return null;
+	}	
+		
+	public void incluir(Solicitacao solicitacao) {
+				
+	}
+	
+	public void excluir(Integer id) {
+		
+	}
+}

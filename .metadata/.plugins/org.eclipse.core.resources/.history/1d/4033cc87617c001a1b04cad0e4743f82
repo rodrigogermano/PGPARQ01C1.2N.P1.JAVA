@@ -1,0 +1,19 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
+<jsp:include page='../master/header.jsp'></jsp:include>
+<jsp:include page='../master/menu.jsp'></jsp:include>
+
+<div class="container mt-3">
+
+	<form method="post" action="solicitacao">
+		
+	  	
+	  	<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+
+
+</div>
+<jsp:include page='../master/footer.jsp'></jsp:include>

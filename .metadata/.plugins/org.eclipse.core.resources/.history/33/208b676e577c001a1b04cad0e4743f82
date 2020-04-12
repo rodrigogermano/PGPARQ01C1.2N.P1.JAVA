@@ -1,0 +1,38 @@
+package br.edu.infnet.manutencao.AppManutencao.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.edu.infnet.manutencao.AppManutencao.model.service.ClienteService;
+import br.edu.infnet.manutencao.AppManutencao.model.service.SolicitacaoService;
+
+@Controller
+public class SolicitacaoController {
+
+	@Autowired
+	private SolicitacaoService service;
+	
+	@Autowired
+	private ClienteService serviceCliente;
+	
+	@RequestMapping(value = "/solicitacao", method = RequestMethod.GET)
+	public String show(Model model) {
+
+		model.addAttribute("clientes", serviceCliente.obterLista()); 	
+		
+		return  "ordemdeservico/novo";
+	}
+	
+	@RequestMapping(value = "/solicitacao/excluir/{id}", method = RequestMethod.GET)
+	public String delete(Model model,
+			@PathVariable Integer id) {
+
+		service.excluir(id);		
+		
+		return  "redirect:/home";
+	}
+}

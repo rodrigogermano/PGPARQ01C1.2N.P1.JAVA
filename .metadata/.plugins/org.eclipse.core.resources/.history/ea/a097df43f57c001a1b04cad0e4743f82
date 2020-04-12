@@ -1,0 +1,15 @@
+package br.edu.infnet.manutencao.AppManutencao.viewmodel;
+
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+public class PreventivaViewModel {
+
+	private Integer solicitacaoId;	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date data;
+	private String engenheiro;
+	private String tagEquipamento;
+	
+}

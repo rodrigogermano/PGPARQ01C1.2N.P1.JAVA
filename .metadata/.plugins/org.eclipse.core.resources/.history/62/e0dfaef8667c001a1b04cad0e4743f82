@@ -1,0 +1,108 @@
+package br.edu.infnet.manutencao.AppManutencao.controller;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.Corretiva;
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.OrdemDeServico;
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.Solicitacao;
+import br.edu.infnet.manutencao.AppManutencao.model.service.ClienteService;
+import br.edu.infnet.manutencao.AppManutencao.model.service.SolicitacaoService;
+import br.edu.infnet.manutencao.AppManutencao.viewmodel.CorretivaViewModel;
+
+@Controller
+public class SolicitacaoController {
+
+	@Autowired
+	private SolicitacaoService service;
+	
+	@Autowired
+	private ClienteService serviceCliente;
+	
+	@RequestMapping(value = "/solicitacao", method = RequestMethod.GET)
+	public String show(Model model) {
+
+		model.addAttribute("clientes", serviceCliente.obterLista()); 	
+		
+		return  "ordemdeservico/novo";
+	}	
+	
+	@RequestMapping(value = "/solicitacao", method = RequestMethod.POST)
+	public String save(Model model,
+			Solicitacao solicitacao) {
+		
+		System.out.println(solicitacao.getEquipe());
+		System.out.println(solicitacao.getCliente().getId());	
+		
+		service.incluir(solicitacao);
+		
+		return  "redirect:solicitacao/" + solicitacao.getId() + "/detalhe";
+	}
+	
+	@RequestMapping(value = "/solicitacao/{id}/detalhe", method = RequestMethod.GET)
+	public String save(Model model,
+			@PathVariable Integer id) {
+		
+		model.addAttribute("solicitacao", service.obterPorId(id)); 	
+		
+		return  "ordemdeservico/detalhe";
+	}
+	
+	@RequestMapping(value = "/solicitacao/excluir/{id}", method = RequestMethod.GET)
+	public String delete(Model model,
+			@PathVariable Integer id) {
+
+		service.excluir(id);		
+		
+		return  "redirect:/home";
+	}
+	
+	@RequestMapping(value = "/solicitacao/{id}/corretiva", method = RequestMethod.GET)
+	public String showCorretiva(
+			Model model,
+			@PathVariable Integer id) {
+		
+		Solicitacao solicitacao = service.obterPorId(id).get();		
+		
+		System.out.println(solicitacao.getCliente());
+		
+		model.addAttribute("solicitacao", solicitacao); 	
+		
+		return  "ordemdeservico/corretiva";
+	}
+	
+	@RequestMapping(value = "/solicitacao/corretiva", method = RequestMethod.POST)
+	public String postCorretiva(
+			Model model,
+			CorretivaViewModel corretiva) {
+		
+		Solicitacao _solicitacao = service.obterPorId(corretiva.getSolicitacaoId()).get();		
+		Corretiva _corretiva = new Corretiva();
+		
+		_corretiva.setSolicitacao(_solicitacao);
+		
+		System.out.println(corretiva.getData());		
+		
+		_corretiva.setData(corretiva.getData());
+		_corretiva.setEngenheiro(corretiva.getEngenheiro());
+		_corretiva.setTagEquipamento(corretiva.getTagEquipamento());
+		_corretiva.setCodigoDoErro(corretiva.getCodigoDoErro());
+		
+		List<OrdemDeServico> ordens = new ArrayList<OrdemDeServico>();
+		ordens.add(_corretiva);
+		
+		_solicitacao.setOrdensDeServico(ordens);
+		
+		service.incluir(_solicitacao);
+		
+		return  "ordemdeservico/corretiva";
+	}	
+	
+}

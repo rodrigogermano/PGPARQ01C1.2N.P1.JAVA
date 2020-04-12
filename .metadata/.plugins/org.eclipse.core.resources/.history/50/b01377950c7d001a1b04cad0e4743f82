@@ -1,0 +1,35 @@
+package br.edu.infnet.manutencao.AppManutencao.model.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.Cliente;
+
+
+@Service
+public class ClienteService {
+	
+	@Autowired
+	private RestTemplate rest;
+	
+	
+	public List<Cliente> obterLista(){
+		return null;
+	}	
+	
+	public Optional<Cliente> obterPorId(Integer id) {
+		return null;
+	}	
+		
+	public void incluir(Cliente cliente) {
+				
+	}
+	
+	public void excluir(Integer id) {
+		
+	}
+}

@@ -1,0 +1,36 @@
+package br.edu.infnet.manutencao.AppManutencao.negocio;
+
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TPreventiva")
+@PrimaryKeyJoinColumn(name = "idOrdemDeServico")
+public class Preventiva extends OrdemDeServico  {
+
+	private String tarefa;
+	
+	public Preventiva() {		
+	}
+
+	public Preventiva(String tarefa) {
+		this();
+		this.tarefa = tarefa;
+	}
+
+	public String getTarefa() {
+		return tarefa;
+	}
+
+	public void setTarefa(String tarefa) {
+		this.tarefa = tarefa;
+	}
+	
+	@Override
+	public String toString() {	 
+		return String.format("Tarefa: %s", 
+				this.getTarefa());
+	}
+	
+}

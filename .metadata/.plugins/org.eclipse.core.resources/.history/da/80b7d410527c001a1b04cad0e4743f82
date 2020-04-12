@@ -1,0 +1,8 @@
+package br.edu.infnet.manutencao.AppManutencao.controller;
+
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class ClienteController {
+
+}

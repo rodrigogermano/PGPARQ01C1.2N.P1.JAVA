@@ -1,0 +1,35 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
+<jsp:include page='master/header.jsp'></jsp:include>
+<jsp:include page='master/menu.jsp'></jsp:include>
+
+<c:forEach var="solicitacao" items="${solicitacaoLista}">
+	<div class="card mb-12 bg-dark text-white mt-4 ml-4 mr-4" style="max-width: 100%;">
+		  <div class="row no-gutters">
+		    
+		    <div class="col-md-12">
+		      <div class="card-body">
+		        <h5 class="card-title">${solicitacao}</h5>
+		        <p class="card-text">		        
+		        	<ul>
+			        	<c:forEach var="os" items="${solicitacao.getOrdensDeServico()}">
+			        		<li>${os}</li>
+			        	</c:forEach>
+		        	</ul>		        	
+		        </p>
+		         <div class="card-body">
+				    <a href="/home/solicitacao/${solicitacao.getId()}" class="card-link" style="color: #bf1515 !important;">Excluir</a>				    
+				  </div>		        
+		      </div>
+		    </div>
+		  </div>
+		</div>
+</c:forEach> 
+
+
+<jsp:include page='master/footer.jsp'></jsp:include>
+
+

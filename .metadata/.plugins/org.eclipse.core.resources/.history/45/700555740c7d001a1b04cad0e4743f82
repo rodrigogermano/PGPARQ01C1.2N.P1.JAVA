@@ -1,0 +1,30 @@
+package br.edu.infnet.manutencao.AppManutencao.model.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Service;
+
+import br.edu.infnet.manutencao.AppManutencao.model.negocio.Cliente;
+
+
+@Service
+public class ClienteService {
+	
+	
+	public List<Cliente> obterLista(){
+		return null;
+	}	
+	
+	public Optional<Cliente> obterPorId(Integer id) {
+		return null;
+	}	
+		
+	public void incluir(Cliente cliente) {
+				
+	}
+	
+	public void excluir(Integer id) {
+		
+	}
+}
